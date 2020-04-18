@@ -26,6 +26,8 @@ routes.post('/user', UserController.store);
 //Rotas referentes aos incidents
 routes.get('/incident', IncidentController.index);
 routes.post('/incident', upload.single('image'), IncidentController.store);
+routes.put('/incident/:id', IncidentController.update);
+routes.delete('/incident/:id', IncidentController.delete);
 
 
 

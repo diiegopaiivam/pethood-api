@@ -5,7 +5,10 @@ const IncidentSchema = mongoose.Schema({
     title: String, 
     description: String,
     value: String,
-    user_id: String,
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    }
 }, { 
     toJSON: {
         virtuals: true
