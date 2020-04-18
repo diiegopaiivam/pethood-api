@@ -1,0 +1,25 @@
+require('dotenv').config()
+
+const express = require('express');
+const mongoose = require('mongoose');
+const routes = require('./routes');
+const path = require('path');
+// Seta a variavél que está no arquivo .env a porta, caso não tenha ele starta na porta 3333
+const porta = process.env.PORT || 3333
+//Seta a variavél de database_url que está no .env
+mongoose.connect(process.env.DATABASE_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false, 
+});
+
+
+const app = express();
+
+app.use(express.json());
+//Salva as imagens na pasta de uploads na raiz do projeto através do path
+app.use('/files', express.static(path.resolve(__dirname, '..', 'uploads')))
+app.use(routes);
+
+
+app.listen(porta);
