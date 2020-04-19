@@ -28,6 +28,7 @@ routes.get('/users', UserController.index);
 routes.put('/users/:id', UserController.update);
 routes.delete('/users/:id', UserController.delete);
 routes.post('/users', celebrate({
+    //Validações
     [Segments.BODY]: Joi.object().keys({
         name: Joi.string().required(),
         password: Joi.string().required().min(5),
@@ -40,6 +41,7 @@ routes.post('/users', celebrate({
 
 //Rotas referentes aos incidents
 routes.get('/incidents', IncidentController.index);
+routes.get('/incidents/:id', IncidentController.show);
 routes.post('/incidents', upload.single('image'), IncidentController.store);
 routes.put('/incidents/:id', IncidentController.update);
 routes.delete('/incidents/:id', IncidentController.delete);
