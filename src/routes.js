@@ -21,9 +21,9 @@ routes.post('/sessions', SessionController.login);
 
 //Rotas referente ao usuário
 routes.get('/', UserController.index);
-routes.put('/user/:id', UserController.update);
-routes.delete('/user/:id', UserController.delete);
-routes.post('/user', celebrate({
+routes.put('/users/:id', UserController.update);
+routes.delete('/users/:id', UserController.delete);
+routes.post('/users', celebrate({
     [Segments.BODY]: Joi.object().keys({
         name: Joi.string().required(),
         password: Joi.string().required().min(5),
@@ -35,10 +35,10 @@ routes.post('/user', celebrate({
 }), UserController.store);
 
 //Rotas referentes aos incidents
-routes.get('/incident', IncidentController.index);
-routes.post('/incident', upload.single('image'), IncidentController.store);
-routes.put('/incident/:id', IncidentController.update);
-routes.delete('/incident/:id', IncidentController.delete);
+routes.get('/incidents', IncidentController.index);
+routes.post('/incidents', upload.single('image'), IncidentController.store);
+routes.put('/incidents/:id', IncidentController.update);
+routes.delete('/incidents/:id', IncidentController.delete);
 
 
 
