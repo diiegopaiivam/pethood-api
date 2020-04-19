@@ -19,8 +19,12 @@ const upload = multer(uploadConfig);
 //Rota de Login
 routes.post('/sessions', SessionController.login);
 
+routes.get('/', (request, response) => {
+    return response.send('Só na guitarrada complicada');
+});
+
 //Rotas referente ao usuário
-routes.get('/', UserController.index);
+routes.get('/users', UserController.index);
 routes.put('/users/:id', UserController.update);
 routes.delete('/users/:id', UserController.delete);
 routes.post('/users', celebrate({
