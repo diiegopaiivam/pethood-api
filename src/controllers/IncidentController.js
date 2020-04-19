@@ -66,12 +66,12 @@ module.exports = {
     async delete(request, response){
         const  user_id  = request.headers.authorization;
         const { id } = request.params;
-
+        //verifica se o usuário que está deletando é o mesmo que está logado, se não for ele retorna um não autorizado
         if(!user_id){
             response.status(403).send({
                 message: 'Você não está autorizado a deletar o incident!'
             })
-        }else {
+        } else {
             try {
                 await Incident.findByIdAndDelete(id);
                 response.status(200).send({

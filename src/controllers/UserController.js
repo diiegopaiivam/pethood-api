@@ -12,7 +12,7 @@ module.exports = {
 
     async store(request, response){
 
-        const { name, password, email, whatsapp, phone, city, uf } = request.body;
+        const { name, password, email, phone, city, uf } = request.body;
         /**
          * Criptografando a senha do usuário, transformando um pequeno hash hexadecimal com a a função do crypto do nodejs
          */
@@ -28,8 +28,7 @@ module.exports = {
             const user = await User.create({
                 name,
                 password: crypted,
-                email,
-                whatsapp, 
+                email, 
                 phone,
                 city,
                 uf

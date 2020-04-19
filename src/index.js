@@ -1,6 +1,7 @@
 require('dotenv').config()
 
 const express = require('express');
+const { errors } = require('celebrate');
 const mongoose = require('mongoose');
 const routes = require('./routes');
 const path = require('path');
@@ -20,6 +21,7 @@ app.use(express.json());
 //Salva as imagens na pasta de uploads na raiz do projeto através do path
 app.use('/files', express.static(path.resolve(__dirname, '..', 'uploads')))
 app.use(routes);
+app.use(errors());
 
 
 app.listen(porta);

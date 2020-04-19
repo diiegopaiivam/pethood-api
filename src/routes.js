@@ -2,6 +2,8 @@
 const { Router } = require('express');
 const routes = Router();
 //
+// Importações referente as validações
+const { Segments, celebrate, Joi } = require('celebrate');
 //importações referente aos uploads de arquivos
 const multer = require('multer');
 const uploadConfig = require('./config/upload')
@@ -21,7 +23,16 @@ routes.post('/sessions', SessionController.login);
 routes.get('/', UserController.index);
 routes.put('/user/:id', UserController.update);
 routes.delete('/user/:id', UserController.delete);
-routes.post('/user', UserController.store);
+routes.post('/user', celebrate({
+    [Segments.BODY]: Joi.object().keys({
+        name: Joi.string().required(),
+        password: Joi.string().required().min(5),
+        email: Joi.string().required().email(),
+        phone: Joi.string().required().min(8).max(9),
+        city: Joi.string().required(),
+        uf: Joi.string().required().length(2)
+    }),
+}), UserController.store);
 
 //Rotas referentes aos incidents
 routes.get('/incident', IncidentController.index);
