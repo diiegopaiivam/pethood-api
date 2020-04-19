@@ -14,14 +14,14 @@ module.exports = {
  
         const incident = await Incident.findById(id);
         const { email, phone } = await User.findById(incident.user);
-
+    
         return response.status(200).json({
             incident,
             phone,
             email
         });
     }, 
-    
+
     async store(request, response){
         const { filename } = request.file;
         const { title, description, value } = request.body;
@@ -42,7 +42,8 @@ module.exports = {
                 image: filename,
                 title,
                 description,
-                value
+                value,
+                favorite: false
             });
     
             Mailer.senderCreateIncident(email,name);

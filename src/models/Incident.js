@@ -5,6 +5,7 @@ const IncidentSchema = mongoose.Schema({
     title: String, 
     description: String,
     value: String,
+    favorite: Boolean,
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
