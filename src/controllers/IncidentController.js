@@ -24,7 +24,7 @@ module.exports = {
 
     async store(request, response){
         const { filename } = request.file;
-        const { title, description, value } = request.body;
+        const { title, description, value, latitude, longitude } = request.body;
         const  user_id  = request.headers.authorization;
         
         const { email, name } = await User.findById(user_id);
@@ -36,6 +36,11 @@ module.exports = {
             })
         }
 
+        const location = {
+            type: 'Point',
+            coordinates: [longitude, latitude]
+        };
+
         try {
             const { id } = await Incident.create({
                 user: user_id,
@@ -43,6 +48,7 @@ module.exports = {
                 title,
                 description,
                 value,
+                location,
                 favorite: false
             });
     

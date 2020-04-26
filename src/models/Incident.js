@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const PointSchema = require('./Utils/PointSchema');
 
 const IncidentSchema = mongoose.Schema({
     image: String,
@@ -6,6 +7,10 @@ const IncidentSchema = mongoose.Schema({
     description: String,
     value: String,
     favorite: Boolean,
+    location: {
+        type: PointSchema,
+        index: '2dsphere'
+    },
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
