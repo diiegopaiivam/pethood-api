@@ -5,7 +5,6 @@ const IncidentSchema = mongoose.Schema({
     image: String,
     title: String, 
     description: String,
-    value: String,
     favorite: Boolean,
     location: {
         type: PointSchema,

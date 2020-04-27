@@ -1,4 +1,5 @@
 const User = require('./../models/User');
+const Incident = require('./../models/Incident');
 const crypto = require('crypto');
 const Mailer = require('./../services/mailer'); 
 
@@ -8,6 +9,14 @@ module.exports = {
         const users = await User.find();
 
         response.json(users);
+    },
+
+    async show(request, response){
+        const  user_id  = request.headers.authorization;
+
+        const incidents = await Incident.find().where('user', user_id);
+
+        return response.status(200).json({incidents});
     },
 
     async store(request, response){

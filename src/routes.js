@@ -25,6 +25,7 @@ routes.get('/', (request, response) => {
 
 //Rotas referente ao usuário
 routes.get('/users', UserController.index);
+routes.get('/users/incidents/', UserController.show); //Lista os incidents cadastrados pelo usuário.
 routes.put('/users/:id', UserController.update);
 routes.delete('/users/:id', UserController.delete);
 routes.post('/users', celebrate({
