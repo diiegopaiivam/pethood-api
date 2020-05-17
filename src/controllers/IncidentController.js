@@ -24,7 +24,7 @@ module.exports = {
 
     async store(request, response){
         const { filename } = request.file;
-        const { title, description } = request.body;
+        const { title, description, value } = request.body;
         const { user_id } = request.headers;
    
         
@@ -42,6 +42,7 @@ module.exports = {
                 image: filename,
                 title,
                 description,
+                value,
                 // location,
                 favorite: false
             });
