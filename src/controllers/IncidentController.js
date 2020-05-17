@@ -24,22 +24,17 @@ module.exports = {
 
     async store(request, response){
         const { filename } = request.file;
-        const { title, description, latitude, longitude } = request.body;
-        const  user_id  = request.headers.authorization;
+        const { title, description } = request.body;
+        const { user_id } = request.headers;
+   
         
         const { email, name } = await User.findById(user_id);
        
-        
         if(email === null || email.length === 0){
             response.status(403).send({
                 message: "Você não tem autorização para criar um incident"
             })
         }
-
-        const location = {
-            type: 'Point',
-            coordinates: [longitude, latitude]
-        };
 
         try {
             const { id } = await Incident.create({
@@ -47,7 +42,7 @@ module.exports = {
                 image: filename,
                 title,
                 description,
-                location,
+                // location,
                 favorite: false
             });
     
