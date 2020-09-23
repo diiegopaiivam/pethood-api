@@ -21,7 +21,7 @@ const IncidentSchema = mongoose.Schema({
 }); 
 
 IncidentSchema.virtual('image_url').get(function() {
-    return `http://localhost:3333/files/${this.image}`
+    return `${process.env.APP_URL}/files/${this.image}`
 })
 
 
